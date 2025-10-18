@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+  
+ <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+ 
+</head>
+<body>
+
+<p><h2>Tarea M6AE1 - ABPRO1</h2></p>
+
+  <div id="app" class="container mt-5">
+    <h2 class="mb-4">Formulario de Registro</h2>
+
+
+    <form @submit.prevent class="mb-4">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input
+          type="text"
+          id="nombre"
+          class="form-control"
+          v-model="nombre"
+          placeholder="Ingresa tu nombre"
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="correo" class="form-label">Correo electrónico:</label>
+        <input
+          type="email"
+          id="correo"
+          class="form-control"
+          v-model="correo"
+          placeholder="ejemplo@correo.com"
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="edad" class="form-label">Edad:</label>
+        <input
+          type="number"
+          id="edad"
+          class="form-control"
+          v-model.number="edad"
+          min="1"
+        >
+      </div>
+
+      <button type="button" class="btn btn-secondary" @click="limpiarFormulario">
+        Limpiar formulario
+      </button>
+    </form>
+
+ 
+    <div v-if="formularioCompleto" class="card">
+      <div class="card-header">
+        <h5>Resumen de Datos</h5>
+      </div>
+      <div class="card-body">
+        <p><strong>Nombre:</strong> {{ nombre }}</p>
+        <p><strong>Correo:</strong> {{ correo }}</p>
+        <p><strong>Edad:</strong> {{ edad }}</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          nombre: '',
+          correo: '',
+          edad: null
+        };
+      },
+      computed: {
+        formularioCompleto() {
+          return this.nombre && this.correo && this.edad;
+        }
+      },
+      methods: {
+        limpiarFormulario() {
+          this.nombre = '';
+          this.correo = '';
+          this.edad = null;
+        }
+      }
+    }).mount('#app');
+  </script>
+
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    body {
+      background-image: url(/assets/img/back.jpg);
+    }
+  </style>
+ 
+</body>
+</html>
